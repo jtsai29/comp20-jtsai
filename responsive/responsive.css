@@ -1,0 +1,58 @@
+/* Set the size of the image to be displayed */
+div.homer{
+	width: 167px;
+	height: 125px;
+	background-image: url('homer.jpg');
+
+}
+
+/*Each rule below will show a different section of
+image based on the browser width*/
+
+@media (min-width: 1201px){
+	div.homer{
+		background-position: 0 0;
+	}
+}
+
+@media (min-width: 1101px) and (max-width:1200px){
+	div.homer{
+		background-position: 167px 0;
+	}
+}
+
+@media (min-width: 1001px) and (max-width:1100px){
+	div.homer{
+		background-position: 0 -125px;
+	}
+}
+
+@media (min-width: 901px) and (max-width:1000px){
+	div.homer{
+		background-position: 167px -125px;
+	}
+}
+
+@media (min-width: 801px) and (max-width:900px){
+	div.homer{
+		background-position: 0 -250px;
+	}
+}
+
+@media (min-width: 701px) and (max-width:800px){
+	div.homer{
+		background-position: 167px -250px;
+	}
+}
+
+@media (min-width: 601px) and (max-width:700px){
+	div.homer{
+		background-position: 0 -375px;
+	}
+}
+
+@media (max-width:600px){
+	div.homer{
+		background-position: 167px -375px;
+	}
+}
