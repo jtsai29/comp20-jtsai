@@ -12,15 +12,23 @@ function init(){
 	background.src = 'duckhunt-background.gif';
 	ctx.drawImage(background,0,0);
 
-	// Draws birds into background
-	birds = new Image();
-	birds.src = 'duckhunt_various_sheet.png';
+	// Draw birds into background
+	ducks = new Image();
+	ducks.src = 'duckhunt_various_sheet.png';
 	
-	// 1st Bird has top left corner at (40, 120)
+	// 1st duck has top left corner at (40, 120)
 	// and bottom right corner at (75, 145)
-	// Width = 35, Height = 25
-	// Should be drawn into background at (85, 85)
-	ctx.drawImage(birds, 40, 120, 35, 25,
-		85, 85, 35, 25);
+	// Should be drawn into background at (75, 70)
+	width1 = 35;
+	height1 = 25;
+	ctx.drawImage(ducks, 40, 120, width1, 
+		height1, 75, 70, width1, height1);
 
+	// 2nd duck has top left corner at (127, 117)
+	// and bottom right corner at (165, 146)
+	// Should be drawn into background at (135, 40)
+	width2 = 38;
+	height2 = 29;
+	ctx.drawImage(ducks, 127, 117, width2,
+		height2, 135, 40, width2, height2);
 }
