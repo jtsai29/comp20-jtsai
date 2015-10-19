@@ -9,8 +9,9 @@ function display(arrayData) {
 
 //get JSON data
 jsondata = new XMLHttpRequest();
+url = "http://messagehub.herokuapp.com/messages.json";
 
-jsondata.open("GET", "data.json", true);
+jsondata.open("GET", url, true);
 
 jsondata.onreadystatechange = function() {
 	if (jsondata.readyState == 4 && jsondata.status == 200){
