@@ -1,1 +1,9 @@
-/* Your CSS here... */
+body {
+	background-color: #ead8eb;
+}
+
+p {
+	background-color: #c8f463;
+	font-family: Helvetica;
+	font-weight: bold;
+}
