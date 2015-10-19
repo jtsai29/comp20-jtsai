@@ -1,12 +1,18 @@
 //get JSON data
 jsondata = new XMLHttpRequest();
-jsondata.open("GET", "data.json");
+
+jsondata.onreadystatechange = function() {
+	if (jsondata.readyState == 4){
+		parsed = JSON.parse(jsondata.responseText);
+	}
+}
+
+jsondata.open("GET", "data.json", true);
 jsondata.send();
-parsed = JSON.parse(jsondata);
 
 //display JSON data in "messages" div
 msg = document.getElementById("messages");
-for (count = 0; count < parsedObjects.length; count++){
-	msg.innerHTML += "<p>" + parsedObjects[count]["content"] +
-		" " + parsedObjects[count]["username"] + "</p>";
+for (count = 0; count < parsed.length; count++){
+	msg.innerHTML += "<p>" + parsed[count]["content"] +
+		" " + parsed[count]["username"] + "</p>";
 }
