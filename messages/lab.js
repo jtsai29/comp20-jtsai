@@ -1,16 +1,3 @@
-//get JSON data
-jsondata = new XMLHttpRequest();
-
-jsondata.onreadystatechange = function() {
-	if (jsondata.readyState == 4 && jsondata.status == 200){
-		parsed = JSON.parse(jsondata.responseText);
-		display(parsed);
-	}
-}
-
-jsondata.open("GET", "data.json", true);
-jsondata.send();
-
 //display JSON data in "messages" div
 function display(arrayData) {
 	msg = document.getElementById("messages");
@@ -19,3 +6,18 @@ function display(arrayData) {
 			" " + arrayData[count]["username"] + "</p>";
 	}
 }
+
+//get JSON data
+jsondata = new XMLHttpRequest();
+
+jsondata.open("GET", "data.json", true);
+
+jsondata.onreadystatechange = function() {
+	if (jsondata.readyState == 4 && jsondata.status == 200){
+		parsedata = JSON.parse(jsondata.responseText);
+		display(parsedata);
+	}
+};
+
+jsondata.send();
+
