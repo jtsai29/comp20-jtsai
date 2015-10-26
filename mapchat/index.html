@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 
-
-
 <html>
 
-
-
 <head>
-
 	<title>Map Chat</title>
-
 	<meta charset="utf-8" />
-
 	<link rel="stylesheet" href="map_style.css" />
 
-
 	<script>
+		var req = new XMLHttpRequest();
+		var myLat = 0;
+		var myLong = 0;
+		var map;
+		
+		function init() {
+			map = new google.maps.Map(document.getElementById("map_canvas"), {
+				zoom: 10;
+				center: myPos;
+			});
+			getLoc();
+		}
+
+		function getLoc(){
+
+		}
 
 	</script>
-
 </head>
 
-
-
 <body onload="init()">
-
 	<div id="map_canvas"></div>
-
 </body>
-
-
 
 </html>
