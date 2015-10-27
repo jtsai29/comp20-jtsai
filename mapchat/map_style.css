@@ -5,6 +5,8 @@ html {
 body {
 	background-color: #ccf8ff;
 	height: 100%;
+	margin: 0px;
+	padding: 0px;
 }
 
 #map_canvas {
