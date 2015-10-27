@@ -5,13 +5,19 @@
 <head>
 	<title>Map Chat</title>
 	<meta charset="utf-8" />
+	<script type="text/javascript" 
+		src="https://maps.googleapis.com/maps/api/js?sensor=true">
+	</script>
 	<link rel="stylesheet" href="map_style.css" />
 
 	<script>
 		var req = new XMLHttpRequest();
 		var myLat = 0;
 		var myLong = 0;
+		var myPos = new google.maps.LatLng(myLat, myLong);
 		var map;
+		var marker;
+		var infowindow = new google.maps.InfoWindow();
 		
 		function init() {
 			map = new google.maps.Map(document.getElementById("map_canvas"), {
