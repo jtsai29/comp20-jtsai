@@ -28,6 +28,20 @@
 		}
 
 		function getLoc(){
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(pos) {
+					myLat = pos.coords.latitude;
+					myLong = pos.coords.longitude;
+					renderMap();
+				});
+			}
+		}
+
+		//Display map and people on it
+		function renderMap() {
+			myPos = new google.maps.LatLng(myLat, myLong);
+
+			map.panTo(myPos);
 
 		}
 
