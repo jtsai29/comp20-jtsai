@@ -110,14 +110,13 @@
 				userMark.setMap(map);
 
 				otherMarks.push(userMark);
-			}
 
-			for (i = 0; i < otherMarks.length; i++) {
 				//Set info window
 				google.maps.event.addListener(otherMarks[i], 'click', function() {
 					otherInfo.setContent(otherMarks[i].title);
 					otherInfo.open(map, this);
 				});
+
 			}
 		}
 
