@@ -113,7 +113,7 @@
 
 				//Set info window
 				google.maps.event.addListener(userMark, 'click', function() {
-					otherInfo.setContent(userMark.title);
+					otherInfo.setContent(this.title);
 					otherInfo.open(map, this);
 				});
 
