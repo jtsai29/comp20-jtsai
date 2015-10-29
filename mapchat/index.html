@@ -89,6 +89,10 @@
 			for (i = 0; i < parseData.length; i++) {
 				//Make marker
 				user = parseData[i];
+
+				console.log(parseData.length);
+				console.log(user);
+
 				userLoc = new google.maps.LatLng(user["lat"], user["lng"]);
 
 				console.log(user["lat"]);
