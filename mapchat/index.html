@@ -41,8 +41,6 @@
 					myLat = pos.coords.latitude;
 					myLong = pos.coords.longitude;
 					sendData();
-					console.log(parsedInfo);
-					renderMap(parsedInfo);
 				});
 			}
 			else {
@@ -62,10 +60,13 @@
 					parsedInfo = JSON.parse(req.responseText);
 					console.log(req.responseText);
 					console.log(parsedInfo);
+					
 				}
 			}
 
 			req.send(myData);
+
+			renderMap(parsedInfo);
 		}
 
 		function renderMap(parseData) {
