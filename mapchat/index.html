@@ -17,13 +17,14 @@
 		var marker;
 		var infowindow = new google.maps.InfoWindow();
 		var login = "LayneVasquez";
-		var message = "I was here!";
+		var message = "I'm really feeling it!";
 		
 		//Variables for data sending/requesting
 		var req = new XMLHttpRequest();
 		var store_url = "https://secret-about-box.herokuapp.com/sendLocation";
 		var myData = "login=" + login + "&lat=" + myLat + 
 			"&lng=" + myLong + "&message=" + message;
+		var parseData; //will hold JSON data of everyone after received
 
 		function init() {
 			map = new google.maps.Map(document.getElementById("map_canvas"), {
@@ -57,7 +58,7 @@
 
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
-					console.log(req.responseText);
+					parseData = JSON.parse(req.responseText);
 				}
 			}
 			req.send(myData);
@@ -77,12 +78,14 @@
 				icon: marker_url
 			});
 			marker.setMap(map);
-				
+
 			// Open info window on click of marker
 			google.maps.event.addListener(marker, 'click', function() {
 				infowindow.setContent(marker.title);
 				infowindow.open(map, marker);
 			});
+
+			
 		}
 	</script>
 </head>
