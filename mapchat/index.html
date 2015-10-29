@@ -2,72 +2,71 @@
 
 <html>
 
-	<head>
-		<title>Map Chat</title>
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-		<link rel="stylesheet" href="map_style.css" />
+<head>
+	<title>Map Chat</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+	<link rel="stylesheet" href="map_style.css" />
 		
-		<script>
-			var myLat = 0;
-			var myLong = 0;
-			var request = new XMLHttpRequest();
-			var me = new google.maps.LatLng(myLat, myLong);
-			var myOptions = {
-						zoom: 14,
-						center: me,
-						//mapTypeId: google.maps.MapTypeId.ROADMAP
-					};
-			var map;
-			var marker;
-			var infowindow = new google.maps.InfoWindow();
-			
-			function init()
-			{
-				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-				getMyLoc();
+	<script>
+		var myLat = 0;
+		var myLong = 0;
+		var req = new XMLHttpRequest();
+		var myLoc = new google.maps.LatLng(myLat, myLong);
+		var map;
+		var marker;
+		var infowindow = new google.maps.InfoWindow();
+		var login = "LayneVasquez";
+		var message = "I was here!"
+		
+		function init() {
+			map = new google.maps.Map(document.getElementById("map_canvas"), {
+				zoom: 14,
+				center: myLoc
+			});
+			getMyLoc();
+		}
+		
+		function getMyLoc() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(pos) {
+					myLat = pos.coords.latitude;
+					myLong = pos.coords.longitude;
+					renderMap();
+				});
 			}
-			
-			function getMyLoc() {
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(function(position) {
-						myLat = position.coords.latitude;
-						myLong = position.coords.longitude;
-						renderMap();
-					});
-				}
-				else {
-					alert("Geolocation is not supported by your web browser.");
-				}
+			else {
+				alert("Geolocation is not supported by your web browser.");
 			}
+		}
 
-			function renderMap()
-			{
-				me = new google.maps.LatLng(myLat, myLong);
+		function renderMap() {
+			me = new google.maps.LatLng(myLat, myLong);
+			
+			// Update map and go to my location
+			map.panTo(me);
+
+			// Create my marker
+			marker_url = "map_marker.png";
+			marker = new google.maps.Marker({
+				position: myLoc,
+				title: login,
+				icon: marker_url
+			});
+			marker.setMap(map);
 				
-				// Update map and go to my location
-				map.panTo(me);
-	
-				// Create my marker
-				marker_url = "map_marker.png";
-				marker = new google.maps.Marker({
-					position: me,
-					title: "I was here!",
-					icon: marker_url
-				});
-				marker.setMap(map);
-					
-				// Open info window on click of marker
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.setContent(marker.title);
-					infowindow.open(map, marker);
-				});
-			}
-		</script>
-	</head>
-	
-	<body onload="init()">
-		<h1>Map Chat</h1>
-		<div id="map_canvas"></div>
-	</body>
+			// Open info window on click of marker
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.setContent(marker.title);
+				infowindow.open(map, marker);
+			});
+		}
+	</script>
+</head>
+
+<body onload="init()">
+	<h1>Map Chat</h1>
+	<div id="map_canvas"></div>
+</body>
+
 </html>
