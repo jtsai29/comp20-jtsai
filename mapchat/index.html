@@ -90,10 +90,16 @@
 				//Make marker
 				user = parseData[i];
 				userLoc = new google.maps.LatLng(user["lat"], user["lng"]);
+
+				console.log(user["lat"]);
+				console.log(user["lng"]);
+
 				distance = 0;
 				displayData = user["login"] + ", " + 
 					user["message"] + ", " + distance + " miles";
 				
+				console.log(displayData);
+
 				userMark = new google.maps.Marker({
 					position: userLoc,
 					title: displayData
