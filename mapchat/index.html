@@ -10,13 +10,13 @@
 		
 		<script>
 			var myLat = 0;
-			var myLng = 0;
+			var myLong = 0;
 			var request = new XMLHttpRequest();
-			var me = new google.maps.LatLng(myLat, myLng);
+			var me = new google.maps.LatLng(myLat, myLong);
 			var myOptions = {
-						zoom: 13, // The larger the zoom number, the bigger the zoom
+						zoom: 10,
 						center: me,
-						mapTypeId: google.maps.MapTypeId.ROADMAP
+						//mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
 			var map;
 			var marker;
@@ -29,29 +29,30 @@
 			}
 			
 			function getMyLocation() {
-				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
+				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function(position) {
 						myLat = position.coords.latitude;
-						myLng = position.coords.longitude;
+						myLong = position.coords.longitude;
 						renderMap();
 					});
 				}
 				else {
-					alert("Geolocation is not supported by your web browser.  What a shame!");
+					alert("Geolocation is not supported by your web browser.");
 				}
 			}
 
 			function renderMap()
 			{
-				me = new google.maps.LatLng(myLat, myLng);
+				me = new google.maps.LatLng(myLat, myLong);
 				
-				// Update map and go there...
+				// Update map and go to my location
 				map.panTo(me);
 	
 				// Create a marker
 				marker = new google.maps.Marker({
 					position: me,
-					title: "Here I Am!"
+					title: "I was here!",
+					icon: "map_marker.png"
 				});
 				marker.setMap(map);
 					
