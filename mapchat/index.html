@@ -58,7 +58,6 @@
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
 					parsedInfo = JSON.parse(req.responseText);
-					console.log("Parsed data is " + parsedInfo);
 					renderMap(parsedInfo);
 				}
 			}
@@ -67,8 +66,6 @@
 		}
 
 		function renderMap(parseData) {
-			console.log("The parsed data is" + parseData);			
-
 			myLoc = new google.maps.LatLng(myLat, myLong);
 			
 			//Update map and go to my location
@@ -94,19 +91,16 @@
 				//Make marker
 				user = parseData[i];
 
-				console.log(parseData.length);
-				console.log(user);
+				//Don't redisplay myself
+				if (user["login"] == login) {
+					continue;
+				}
 
 				userLoc = new google.maps.LatLng(user["lat"], user["lng"]);
-
-				console.log(user["lat"]);
-				console.log(user["lng"]);
 
 				distance = 0;
 				displayData = user["login"] + ", " + 
 					user["message"] + ", " + distance + " miles";
-				
-				console.log(displayData);
 
 				userMark = new google.maps.Marker({
 					position: userLoc,
