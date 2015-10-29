@@ -87,6 +87,7 @@
 			});
 
 			//Display other users on map
+			var otherMarks;
 			var otherInfo = new google.maps.InfoWindow();
 			for (i = 0; i < parseData.length; i++) {
 				//Make marker
@@ -114,6 +115,7 @@
 					otherInfo.setContent(userMark.title);
 					otherInfo.open(map, this);
 				});
+				otherMarks.push(userMark);
 			}
 		}
 
@@ -133,9 +135,8 @@
                			Math.cos(myLat.toRad()) * Math.cos(lat2.toRad()) * 
                			Math.sin(dLon/2) * Math.sin(dLon/2);  
 			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-			var d = R * c; 
-
-			alert(d);
+			var d = R * c;
+			return d;
 		}
 	</script>
 </head>
