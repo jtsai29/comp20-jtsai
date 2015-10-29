@@ -25,10 +25,10 @@
 			function init()
 			{
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-				getMyLocation();
+				getMyLoc();
 			}
 			
-			function getMyLocation() {
+			function getMyLoc() {
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function(position) {
 						myLat = position.coords.latitude;
@@ -48,11 +48,12 @@
 				// Update map and go to my location
 				map.panTo(me);
 	
-				// Create a marker
+				// Create my marker
+				marker_url = "map_marker.png";
 				marker = new google.maps.Marker({
 					position: me,
 					title: "I was here!",
-					icon: "map_marker.png"
+					icon: marker_url
 				});
 				marker.setMap(map);
 					
