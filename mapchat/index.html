@@ -99,7 +99,7 @@
 
 				userLoc = new google.maps.LatLng(user["lat"], user["lng"]);
 
-				distance = 0;
+				distance = calcDistance(user["lat"], user["lng"]);
 				displayData = user["login"] + ", " + 
 					user["message"] + ", " + distance + " miles";
 
@@ -115,6 +115,27 @@
 					otherInfo.open(map, this);
 				});
 			}
+		}
+
+		function calcDistance(lat2,long2){
+			Number.prototype.toRad = function() {
+				return this * Math.PI / 180;
+			}
+
+			
+			var R = 6371; // km 
+			//has a problem with the .toRad() method below.
+			var x1 = lat2-myLat;
+			var dLat = x1.toRad();  
+			var x2 = long2-myLong;
+			var dLon = x2.toRad();  
+			var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+               			Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+               			Math.sin(dLon/2) * Math.sin(dLon/2);  
+			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+			var d = R * c; 
+
+			alert(d);
 		}
 	</script>
 </head>
