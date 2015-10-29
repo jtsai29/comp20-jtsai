@@ -13,3 +13,8 @@ body {
 	width: 100%;
 	height: 100%;
 }
+
+h1 {
+	font-family: Helvetica;
+	color: #303880;
+}
