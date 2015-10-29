@@ -112,8 +112,8 @@
 				otherMarks.push(userMark);
 
 				//Set info window
-				google.maps.event.addListener(otherMarks[i], 'click', function() {
-					otherInfo.setContent(otherMarks[i].title);
+				google.maps.event.addListener(userMark, 'click', function() {
+					otherInfo.setContent(userMark.title);
 					otherInfo.open(map, this);
 				});
 
