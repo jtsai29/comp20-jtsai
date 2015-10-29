@@ -24,7 +24,7 @@
 		var store_url = "https://secret-about-box.herokuapp.com/sendLocation";
 		var myData = "login=" + login + "&lat=" + myLat + 
 			"&lng=" + myLong + "&message=" + message;
-		var parseData; //will hold JSON data of everyone after received
+		var parseData = ""; //will hold JSON data of everyone after received
 
 		function init() {
 			map = new google.maps.Map(document.getElementById("map_canvas"), {
@@ -58,7 +58,6 @@
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
 					parseData = JSON.parse(req.responseText);
-					console.log(parseData.length);
 				}
 			}
 
