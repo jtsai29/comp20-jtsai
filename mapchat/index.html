@@ -7,7 +7,7 @@
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 	<link rel="stylesheet" href="map_style.css" />
-		
+
 	<script>
 		//Variables for my map display
 		var myLat = 0;
@@ -18,7 +18,7 @@
 		var infowindow = new google.maps.InfoWindow();
 		var login = "LayneVasquez";
 		var message = "I'm really feeling it!";
-		
+
 		//Variables for data sending/requesting
 		var req = new XMLHttpRequest();
 		var store_url = "https://secret-about-box.herokuapp.com/sendLocation";
@@ -33,7 +33,7 @@
 			});
 			getMyLoc();
 		}
-		
+
 		function getMyLoc() {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(pos) {
@@ -66,7 +66,7 @@
 
 		function renderMap(parseData) {
 			myLoc = new google.maps.LatLng(myLat, myLong);
-			
+
 			//Update map and go to my location
 			map.panTo(myLoc);
 
@@ -116,16 +116,15 @@
 					otherInfo.setContent(this.title);
 					otherInfo.open(map, this);
 				});
-
 			}
-			console.log("The first marker is " + otherMarks[0].title);
 		}
 
+		//Calculates distance between myself and another user
 		function calcDistance(lat2,long2){
 			Number.prototype.toRad = function() {
 				return this * Math.PI / 180;
 			}
-			
+
 			var R = 6371; // km 
 			//has a problem with the .toRad() method below.
 			var x1 = lat2-myLat;
