@@ -87,14 +87,15 @@
 			});
 
 			//Display other users on map
+			var otherInfo = new google.maps.InfoWindow();
 			for (i = 0; i < parseData.length; i++) {
 				//Make marker
 				user = parseData[i];
 
-				//Don't redisplay myself
+				/*Don't redisplay myself
 				if (user["login"] == login) {
 					continue;
-				}
+				}*/
 
 				userLoc = new google.maps.LatLng(user["lat"], user["lng"]);
 
@@ -110,8 +111,8 @@
 
 				//Set info window
 				google.maps.event.addListener(userMark, 'click', function() {
-					infowindow.setContent(userMark.title);
-					infowindow.open(map, userMark);
+					otherInfo.setContent(userMark.title);
+					otherInfo.open(map, userMark);
 				});
 			}
 		}
