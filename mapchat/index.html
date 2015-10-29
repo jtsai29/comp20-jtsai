@@ -41,10 +41,10 @@
 		}
 
 		function renderMap() {
-			me = new google.maps.LatLng(myLat, myLong);
+			myLoc = new google.maps.LatLng(myLat, myLong);
 			
 			// Update map and go to my location
-			map.panTo(me);
+			map.panTo(myLoc);
 
 			// Create my marker
 			marker_url = "map_marker.png";
