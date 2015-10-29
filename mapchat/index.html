@@ -58,7 +58,7 @@
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
 					parseData = JSON.parse(req.responseText);
-					console.log(parseData);
+					console.log(parseData.length);
 				}
 			}
 
