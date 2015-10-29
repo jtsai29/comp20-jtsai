@@ -24,17 +24,6 @@
 		var store_url = "https://secret-about-box.herokuapp.com/sendLocation";
 		var myData = "login=" + login + "&lat=" + myLat + 
 			"&lng=" + myLong + "&message=" + message;
-		req.open("POST", store_url, true);
-
-		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		req.setRequestHeader("Content-length", myData.length);
-
-		req.onreadystatechange = function() {
-			if (req.readyState == 4 && req.status == 200) {
-				console.log(req.responseText);
-			}
-		}
-		req.send(myData);
 
 		function init() {
 			map = new google.maps.Map(document.getElementById("map_canvas"), {
@@ -49,12 +38,29 @@
 				navigator.geolocation.getCurrentPosition(function(pos) {
 					myLat = pos.coords.latitude;
 					myLong = pos.coords.longitude;
+					sendData();
 					renderMap();
 				});
 			}
 			else {
 				alert("Geolocation is not supported by your web browser.");
 			}
+		}
+
+		function sendData() {
+			myData = "login=" + login + "&lat=" + myLat + 
+				"&lng=" + myLong + "&message=" + message;
+			req.open("POST", store_url, true);
+
+			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			//req.setRequestHeader("Content-length", myData.length);
+
+			req.onreadystatechange = function() {
+				if (req.readyState == 4 && req.status == 200) {
+					console.log(req.responseText);
+				}
+			}
+			req.send(myData);
 		}
 
 		function renderMap() {
