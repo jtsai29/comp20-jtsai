@@ -25,7 +25,7 @@
 		var myData = "login=" + login + "&lat=" + myLat + 
 			"&lng=" + myLong + "&message=" + message;
 		//var parseData = ""; //will hold JSON data of everyone after received
-		var parsedInfo;
+		var parseData;
 
 		function init() {
 			map = new google.maps.Map(document.getElementById("map_canvas"), {
@@ -41,6 +41,7 @@
 					myLat = pos.coords.latitude;
 					myLong = pos.coords.longitude;
 					sendData();
+					renderMap();
 				});
 			}
 			else {
@@ -57,18 +58,17 @@
 
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
-					parsedInfo = JSON.parse(req.responseText);
+					parseData = JSON.parse(req.responseText);
+					console.log("Parsed data is " + parseData);
 				}
 			}
-
-			renderMap(parsedInfo);
 
 			req.send(myData);
 
 
 		}
 
-		function renderMap(parseData) {
+		function renderMap() {
 			console.log("The parsed data is" + parseData);			
 
 			myLoc = new google.maps.LatLng(myLat, myLong);
