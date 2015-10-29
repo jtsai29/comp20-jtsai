@@ -54,23 +54,23 @@
 			req.open("POST", store_url, true);
 
 			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			//req.setRequestHeader("Content-length", myData.length);
 
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
 					parseData = JSON.parse(req.responseText);
 				}
 			}
+
 			req.send(myData);
 		}
 
 		function renderMap() {
 			myLoc = new google.maps.LatLng(myLat, myLong);
 			
-			// Update map and go to my location
+			//Update map and go to my location
 			map.panTo(myLoc);
 
-			// Create my marker
+			//Create my marker
 			marker_url = "map_marker.png";
 			marker = new google.maps.Marker({
 				position: myLoc,
@@ -79,13 +79,33 @@
 			});
 			marker.setMap(map);
 
-			// Open info window on click of marker
+			//Open info window on click of marker
 			google.maps.event.addListener(marker, 'click', function() {
 				infowindow.setContent(marker.title);
 				infowindow.open(map, marker);
 			});
 
-			
+			//Display other users on map
+			for (int i = 0; i < parseData.length; i++) {
+				//Make marker
+				user = parseData[i];
+				userLoc = new google.maps.LatLng(user["lat"], user["lng"]);
+				distance = 0;
+				displayData = user["login"] + ", " + 
+					user["message"] + ", " + distance + " miles";
+				
+				userMark = new google.maps.Marker({
+					position: userLoc;
+					title: displayData;
+				});
+				userMark.setMap(map);
+
+				//Set info window
+				google.maps.event.addListener(userMark, 'click', function() {
+					infowindow.setContent(userMark.title);
+					infowindow.open(map, userMark);
+				});
+			}
 		}
 	</script>
 </head>
