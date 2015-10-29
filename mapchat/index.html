@@ -9,9 +9,9 @@
 	<link rel="stylesheet" href="map_style.css" />
 		
 	<script>
+		//Variables for my map display
 		var myLat = 0;
 		var myLong = 0;
-		var req = new XMLHttpRequest();
 		var myLoc = new google.maps.LatLng(myLat, myLong);
 		var map;
 		var marker;
@@ -19,6 +19,19 @@
 		var login = "LayneVasquez";
 		var message = "I was here!";
 		
+		//Variables for data sending/requesting
+		var req = new XMLHttpRequest();
+		var store_url = "https://secret-about-box.herokuapp.com/sendLocation";
+		var myData = "login=" + login + "&lat=" + myLat + 
+			"&lng=" + myLong + "&message=" + message;
+
+		console.log(myData);
+
+		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		req.setRequestHeader("Content-length", myData.length);
+
+		req.send(myData);
+
 		function init() {
 			map = new google.maps.Map(document.getElementById("map_canvas"), {
 				zoom: 14,
