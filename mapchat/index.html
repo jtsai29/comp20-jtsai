@@ -58,18 +58,19 @@
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
 					parsedInfo = JSON.parse(req.responseText);
-					console.log(req.responseText);
-					console.log(parsedInfo);
-					
 				}
 			}
 
+			renderMap(parsedInfo);
+
 			req.send(myData);
 
-			renderMap(parsedInfo);
+
 		}
 
 		function renderMap(parseData) {
+			console.log("The parsed data is" + parseData);			
+
 			myLoc = new google.maps.LatLng(myLat, myLong);
 			
 			//Update map and go to my location
