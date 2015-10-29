@@ -24,7 +24,7 @@
 		var store_url = "https://secret-about-box.herokuapp.com/sendLocation";
 		var myData = "login=" + login + "&lat=" + myLat + 
 			"&lng=" + myLong + "&message=" + message;
-		var parsedInfo;
+		var parsedInfo = [];
 
 		function init() {
 			map = new google.maps.Map(document.getElementById("map_canvas"), {
@@ -135,8 +135,9 @@
                			Math.cos(myLat.toRad()) * Math.cos(lat2.toRad()) * 
                			Math.sin(dLon/2) * Math.sin(dLon/2);  
 			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-			var d = R * c;
-			return d;
+			var distKm = R * c;
+			var distMi = distKm * 0.621371;
+			return distMi;
 		}
 	</script>
 </head>
