@@ -6,22 +6,17 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
-
-		
 		$("document").ready(function() {
 			$("#msg").keypress(function(key) {
 				//Check if enter key was pressed
 				if (key.which == 13) {
+					//Update log
 					var presentTime = new Date();
 					var now = presentTime.toString();
-					$("#log").prepend("<p>" + now + " - " + 
-					$("#msg").val() + "</p>");
+					var logVal = "<p>" + now + " - " + $("#msg").val() + "</p>";
+					$("#log").prepend(logVal);
 				}
 			});
-			/*$("#msg").change(function() {
-				$("#log").prepend("<p>" + now + " - " + 
-					$("#msg").val() + "</p>");
-			});*/
 		});
 	</script>
 </head>
