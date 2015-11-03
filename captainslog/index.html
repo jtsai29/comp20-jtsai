@@ -6,9 +6,23 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
-		var now = new Date();
-		console.log(now.toString());
+
 		
+		$("document").ready(function() {
+			$("#msg").keypress(function(key) {
+				//Check if enter key was pressed
+				if (key.which == 13) {
+					var presentTime = new Date();
+					var now = presentTime.toString();
+					$("#log").prepend("<p>" + now + " - " + 
+					$("#msg").val() + "</p>");
+				}
+			});
+			/*$("#msg").change(function() {
+				$("#log").prepend("<p>" + now + " - " + 
+					$("#msg").val() + "</p>");
+			});*/
+		});
 	</script>
 </head>
 
