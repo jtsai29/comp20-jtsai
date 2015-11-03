@@ -6,7 +6,18 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
+		//localStorage.clear();
 		$("document").ready(function() {
+			//Check local storage for previous logs
+			var prevLogs;
+
+			//If there exist logs, display on page
+			if(localStorage.getItem("allLogs")){
+				prevLogs = localStorage.getItem("allLogs");
+				$("#log").prepend(prevLogs);
+			}
+
+			//Add new logs
 			$("#msg").keypress(function(key) {
 				//Check if enter key was pressed
 				if (key.which == 13) {
@@ -15,6 +26,15 @@
 					var now = presentTime.toString();
 					var logVal = "<p>" + now + " - " + $("#msg").val() + "</p>";
 					$("#log").prepend(logVal);
+
+					//Update prevLogs depending on if empty or not
+					if (prevLogs) {
+						prevLogs = logVal + prevLogs;
+					}
+					else {
+						prevLogs = logVal;
+					}
+					localStorage.setItem("allLogs", prevLogs);
 				}
 			});
 		});
