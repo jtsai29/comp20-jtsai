@@ -57,8 +57,12 @@
 
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
+					console.log("The response text is: " + req.responseText);
 					parsedInfo = JSON.parse(req.responseText);
 					renderMap(parsedInfo);
+				}
+				else {
+					console.log("Didn't get the responseText");
 				}
 			}
 
