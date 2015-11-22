@@ -71,6 +71,7 @@
 
 		function renderMap(parseData) {
 			console.log("The received data is: " + JSON.stringify(parseData));
+			console.log("The first element's data is: ", parseData[0]["login"], parseData[0]["lat"], parseData[0]["lng"], parseData[0]["message"]);
 
 			myLoc = new google.maps.LatLng(myLat, myLong);
 
