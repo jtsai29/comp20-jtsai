@@ -70,6 +70,8 @@
 		}
 
 		function renderMap(parseData) {
+			console.log("The received data is: " + JSON.stringify(parseData));
+
 			myLoc = new google.maps.LatLng(myLat, myLong);
 
 			//Update map and go to my location
