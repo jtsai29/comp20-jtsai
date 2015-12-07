@@ -11,15 +11,36 @@
 <body>
 	<h1>Security</h1>
 	<p>Jonathan Tsai</p>
+	<p>December 8, 2015</p>
 	<hr/>
 
 	<h1>Introduction</h1>
-	<p>Text</p>
+	<p>The purpose of this report is to assess and analyze the security 
+	in two products created by SBettigole. The first product, titled 
+	MapChat, displays on a Google Map all of the user checkins found in
+	a database. This database is contained in the second product, which
+	is a server-side application which handles the insertion of new user
+	checkins and retrieval of checkin data. The MapChat product first
+	determines the location of the user and then sends predetermined 
+	user checkin information to be stored in the database. Afterwards,
+	the database returns all of the user checkins which are used to 
+	display all of the users in their corresponding locations on the map.
+	</p>
+	<p>This report will detail any security related issues of the two
+	products which may impact the intended functionality or privacy in 
+	terms of access for the products.
+	</p>
 	<hr/>
 
-
 	<h1>Methodology</h1>
-
+	<p>The applications were first tested with input formatted as intended 
+	to ensure that the entire product works as intended for ideal input. 
+	After this check, the applications were tested with non-ideal input, 
+	such as JavaScript code being sent as the message of the user checkin. 
+	This was performed using the curl tool to send checkin data directly 
+	to the server database. The functionality of the program with this 
+	non-ideal input was observed. 
+	</p>
 	<hr/>
 
 	<h1>Abstract of Findings</h1>
@@ -31,7 +52,10 @@
 	<hr/>
 
 	<h1>Conclusion</h1>
-
+	<p>Although it works properly with correctly formatted input, the 
+	MapChat application contains security problems that may severely 
+	impact the usability of the product. 
+	</p>
 	<hr/>
 </body>
 </html>
