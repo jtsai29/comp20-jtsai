@@ -48,7 +48,39 @@
 	<hr/>
 
 	<h1>Issues Found</h1>
+	<p>For correctly formatted input, there is no error returned by the server 
+	and the data is stored into the database. (This may not be a security error, 
+	but on the main / GET page of the server application, the displayed checkins 
+	are not in chronological order.) Also, it correctly rejects the given data 
+	if at least one of the required fields (login, lat, lng, message) is missing. 
+	
+	</p>
 
+	<p>When one of the input fields is missing a value (for example, latitude 
+	is specified as "lat="), except for login, the data is still accepted by 
+	the database. In the case of latitude, when displaying on the MapChat page, 
+	the marker associated with the incorrect input appears to use the value 0 
+	for the latitude even though it was not provided.
+	</p>
+	<p>Also, the server does not check if the given latitude and longitude values 
+	are numbers. They can be given as alphabetic text and are accepted into the 
+	database. This is incorrect data that should not have been accepted, but 
+	when accessing the MapChat page, this checkin does not appear. 
+	
+	<p>One important security issue is that HTML can be given in the message 
+	value, and it will not be rejected by the server. So, as an example, the 
+	message value for a checkin was 
+	<xmp><p style='color:blue'>I'm_really_feeling_it</p></xmp> 
+	This made it so that when the message was displayed, it appeared as blue text 
+	and created a new line as well. 
+	</p>
+
+	<p>The server also will still accept any checkin with all of the required 
+	fields but even if they contain additional fields. The checkin will still 
+	display on the map properly assuming that the required fields have correct 
+	values, but the additional fields will unnecessarily occupy space on the 
+	server.
+	</p>
 	<hr/>
 
 	<h1>Conclusion</h1>
