@@ -39,7 +39,7 @@
 	such as JavaScript code being sent as the message of the user checkin. 
 	This was performed using the curl tool to send checkin data directly 
 	to the server database. The functionality of the program with this 
-	non-ideal input was observed. 
+	non-ideal input was then observed. 
 	</p>
 	<hr/>
 
@@ -53,7 +53,8 @@
 	but on the main / GET page of the server application, the displayed checkins 
 	are not in chronological order.) Also, it correctly rejects the given data 
 	if at least one of the required fields (login, lat, lng, message) is missing. 
-	
+	The server does not reject JavaScript code being given in the message field 
+	of the checkin.
 	</p>
 
 	<p>When one of the input fields is missing a value (for example, latitude 
@@ -62,6 +63,7 @@
 	the marker associated with the incorrect input appears to use the value 0 
 	for the latitude even though it was not provided.
 	</p>
+
 	<p>Also, the server does not check if the given latitude and longitude values 
 	are numbers. They can be given as alphabetic text and are accepted into the 
 	database. This is incorrect data that should not have been accepted, but 
@@ -81,6 +83,12 @@
 	values, but the additional fields will unnecessarily occupy space on the 
 	server.
 	</p>
+
+	<p>If the message data is given as JavaScript code, then it will execute on 
+	both the / GET page of the server app and the MapChat page. This can be 
+	dangerous because the JavaScript code can be used maliciously to negatively 
+	impact users who visit those pages. 
+
 	<hr/>
 
 	<h1>Conclusion</h1>
