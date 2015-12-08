@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Map Chat</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+	<link rel="stylesheet" href="map_style.css" />
+
+	<script>
+		//Variables for my map display
+		var myLat = 0;
+		var myLong = 0;
+		var myLoc = new google.maps.LatLng(myLat, myLong);
+		var map;
+		var marker;
+		var infowindow = new google.maps.InfoWindow();
+		var login = "LayneVasquez";
+		var message = "Checking if this can work";
+		var encodedMes = encodeURIComponent(message);
+
+		//Variables for data sending/requesting
+		var req = new XMLHttpRequest();
+		var store_url = "https://lit-bastion-2806.herokuapp.com/sendLocation";
+		var myData = "login=" + login + "&lat=" + myLat + 
+			"&lng=" + myLong + "&message=" + encodedMes;
+		var parsedInfo;
+
+		function init() {
+			map = new google.maps.Map(document.getElementById("map_canvas"), {
+				zoom: 14,
+				center: myLoc
+			});
+			getMyLoc();
+		}
+
+		function getMyLoc() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(pos) {
+					myLat = pos.coords.latitude;
+					myLong = pos.coords.longitude;
+					sendData();
+				});
+			}
+			else {
+				alert("Geolocation is not supported by your web browser.");
+			}
+		}
+
+		function sendData() {
+			myData = "login=" + login + "&lat=" + myLat + 
+				"&lng=" + myLong + "&message=" + message;
+			req.open("POST", store_url, true);
+
+			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			req.onreadystatechange = function() {
+				if (req.readyState == 4 && req.status == 200) {
+					parsedInfo = JSON.parse(req.responseText);
+					renderMap(parsedInfo);
+				}
+			}
+
+			req.send(myData);
+		}
+
+		function renderMap(parseData) {
+			myLoc = new google.maps.LatLng(myLat, myLong);
+
+			//Update map and go to my location
+			map.panTo(myLoc);
+
+			//Create my marker
+			marker_url = "map_marker.png";
+			marker = new google.maps.Marker({
+				position: myLoc,
+				title: login,
+				icon: marker_url
+			});
+			marker.setMap(map);
+
+			//Open info window on click of marker
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.setContent(marker.title);
+				infowindow.open(map, marker);
+			});
+
+			//Display other users on map
+			var otherMarks = [];
+			var otherInfo = new google.maps.InfoWindow();
+			for (i = 0; i < parseData.length; i++) {
+				//Make marker
+				user = parseData[i];
+
+				userLoc = new google.maps.LatLng(user["lat"], user["lng"]);
+
+				distance = calcDistance(user["lat"], user["lng"]);
+				displayData = user["login"] + ", " + 
+					user["message"] + ", " + distance + " miles";
+
+				userMark = new google.maps.Marker({
+					position: userLoc,
+					title: displayData
+				});
+				userMark.setMap(map);
+
+				otherMarks.push(userMark);
+
+				//Set info window
+				google.maps.event.addListener(userMark, 'click', function() {
+					otherInfo.setContent(this.title);
+					otherInfo.open(map, this);
+				});
+			}
+		}
+
+		//Calculates distance between myself and another user
+		function calcDistance(lat2,long2){
+			var R = 6371; // km 
+			var x1 = lat2-myLat;
+			var dLat = x1 * Math.PI / 180; 
+			var x2 = long2-myLong;
+			var dLon = x2 * Math.PI / 180;
+			var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+               			Math.cos(myLat * Math.PI / 180) * 
+				Math.cos(lat2 * Math.PI / 180) * 
+               			Math.sin(dLon/2) * Math.sin(dLon/2);  
+			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+			var distKm = R * c;
+			var distMi = distKm * 0.621371;
+			return distMi;
+		}
+	</script>
+</head>
+
+<body onload="init()">
+	<h1>Map Chat</h1>
+	<div id="map_canvas"></div>
+</body>
+
+</html>
