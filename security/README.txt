@@ -9,6 +9,7 @@ involved in this assignment, nothing particular needed to be implemented.
 Only the display of the report page (index.html) was created along with 
 its styling, and that works properly.
 
-I have not collaborated with anyone on this assignment.
+I received the code and access to the MapChat applications by Scott 
+Bettigole, but I tested the application and completed the report by myself.
 
 I spent approximately 4 hours on this assignment.
